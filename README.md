@@ -45,7 +45,7 @@ If the import goes fine (no message), you're all set. If not, you need to instal
 
     brew install libyaml
 
-2- install the python yaml module (first install pip if you don't have it yet)
+2- install the python yaml module (first install pip if you don't have it yet):
 
     pip install yaml
 
