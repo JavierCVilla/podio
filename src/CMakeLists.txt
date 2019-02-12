@@ -2,7 +2,10 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 file(GLOB sources *.cc)
 file(GLOB headers ${CMAKE_SOURCE_DIR}/include/podio/*.h)
-REFLEX_GENERATE_DICTIONARY(podio ${headers} SELECTION selection.xml)
+
+# OPTIONS paramaters are not redundant, it workarounds a bug on this macro
+# introduced by this commit: 3e88e1a6a2bd7fd9e495be3d900b41a45fd8bab
+REFLEX_GENERATE_DICTIONARY(podio ${headers} SELECTION selection.xml OPTIONS "-I${CMAKE_SOURCE_DIR}/include")
 add_library(podioDict SHARED podio.cxx)
 add_dependencies(podioDict podio-dictgen)
 target_link_libraries(podioDict podio ROOT::Core)

@@ -19,7 +19,10 @@ add_library(TestDataModel SHARED ${sources} ${sources_utils} ${headers} ${header
 target_link_libraries(TestDataModel podio )
 install(TARGETS TestDataModel DESTINATION tests)
 
-REFLEX_GENERATE_DICTIONARY(TestDataModel ${headers} SELECTION src/selection.xml)
+# OPTIONS paramaters are not redundant, it workarounds a bug on this macro
+# introduced by this commit: 3e88e1a6a2bd7fd9e495be3d900b41a45fd8bab 
+REFLEX_GENERATE_DICTIONARY(TestDataModel ${headers} SELECTION src/selection.xml
+                           OPTIONS "-I${CMAKE_SOURCE_DIR}/include" "-I${CMAKE_CURRENT_SOURCE_DIR}/datamodel")
 add_library(TestDataModelDict SHARED TestDataModel.cxx)
 add_dependencies(TestDataModelDict TestDataModel-dictgen)
 target_link_libraries(TestDataModelDict TestDataModel podio )
