@@ -46,11 +46,15 @@ add_test(NAME write COMMAND write)
 set_property(TEST write PROPERTY ENVIRONMENT LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_BINARY_DIR}/src:$ENV{LD_LIBRARY_PATH})
 
 add_test(NAME read-one COMMAND read-one)
-set_property(TEST read-one PROPERTY ENVIRONMENT LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_BINARY_DIR}/src:$ENV{LD_LIBRARY_PATH})
+set_property(TEST read-one PROPERTY ENVIRONMENT 
+             LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_BINARY_DIR}/src:$ENV{LD_LIBRARY_PATH}
+             ROOT_INCLUDE_PATH=${CMAKE_SOURCE_DIR}/tests/datamodel:${ROOT_INCLUDE_PATH})
 set_property(TEST read-one PROPERTY DEPENDS write)
 
 add_test(NAME read-multiple COMMAND read-multiple)
-set_property(TEST read-multiple PROPERTY ENVIRONMENT LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_BINARY_DIR}/src:$ENV{LD_LIBRARY_PATH})
+set_property(TEST read-multiple PROPERTY ENVIRONMENT 
+             LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_BINARY_DIR}/src:$ENV{LD_LIBRARY_PATH}
+             ROOT_INCLUDE_PATH=${CMAKE_SOURCE_DIR}/tests/datamodel:${ROOT_INCLUDE_PATH})
 set_property(TEST read-multiple PROPERTY DEPENDS write)
 
 add_test( NAME pyunittest COMMAND python -m unittest discover -s ${CMAKE_SOURCE_DIR}/python)
