@@ -73,7 +73,3 @@ fi
 # Remove argument variables
 unset _EXTERNALS
 unset _COMPILER
-
-# Define path to podio
-# CMakeLists.txt relies on some environment variables
-export PODIO=$FCCVIEW
