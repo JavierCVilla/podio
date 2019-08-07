@@ -33,9 +33,9 @@ endforeach( sourcefile ${executables} )
 
 #--- Adding tests --------------------------------------------------------------
 # uncomment this to actually run the EDM generation in the tests
-add_test(NAME generate-edm 
-	 COMMAND python ${CMAKE_SOURCE_DIR}/python/podio_class_generator.py 
-			tests/datalayout.yaml 
+add_test(NAME generate-edm
+	 COMMAND python ${CMAKE_SOURCE_DIR}/python/podio_class_generator.py
+			tests/datalayout.yaml
 			tests datamodel
 	 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
@@ -46,13 +46,13 @@ add_test(NAME write COMMAND write)
 set_property(TEST write PROPERTY ENVIRONMENT LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_BINARY_DIR}/src:$ENV{LD_LIBRARY_PATH})
 
 add_test(NAME read-one COMMAND read-one)
-set_property(TEST read-one PROPERTY ENVIRONMENT 
+set_property(TEST read-one PROPERTY ENVIRONMENT
              LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_BINARY_DIR}/src:$ENV{LD_LIBRARY_PATH}
              ROOT_INCLUDE_PATH=${CMAKE_SOURCE_DIR}/tests/datamodel:${ROOT_INCLUDE_PATH})
 set_property(TEST read-one PROPERTY DEPENDS write)
 
 add_test(NAME read-multiple COMMAND read-multiple)
-set_property(TEST read-multiple PROPERTY ENVIRONMENT 
+set_property(TEST read-multiple PROPERTY ENVIRONMENT
              LD_LIBRARY_PATH=${CMAKE_CURRENT_BINARY_DIR}:${CMAKE_BINARY_DIR}/src:$ENV{LD_LIBRARY_PATH}
              ROOT_INCLUDE_PATH=${CMAKE_SOURCE_DIR}/tests/datamodel:${ROOT_INCLUDE_PATH})
 set_property(TEST read-multiple PROPERTY DEPENDS write)
@@ -68,7 +68,7 @@ set_property(TEST pyunittest PROPERTY DEPENDS write)
 add_test(NAME unittest COMMAND unittest)
 
 # Fail tests if there is any error in the output
-set_tests_properties(generate-edm write read-one read-multiple pyunittest unittest 
+set_tests_properties(generate-edm write read-one read-multiple pyunittest unittest
     PROPERTIES FAIL_REGULAR_EXPRESSION "[^a-z]Error;ERROR;Failed"
 )
 
